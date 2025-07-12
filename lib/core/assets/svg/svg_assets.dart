@@ -8,4 +8,6 @@ class SVGAssets {
   static const String notificationDisabled = "assets/svg/empty_notifications.svg";
   static const String search = "assets/svg/search.svg";
   static const String favorites = "assets/svg/favorites.svg";
+  static const String share = "assets/svg/share.svg";
+  static const String back = "assets/svg/back.svg";
 }

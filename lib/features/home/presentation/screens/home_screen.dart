@@ -1,6 +1,7 @@
 import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
 import 'package:albanoon/core/network/injection_container.dart';
+import 'package:albanoon/core/routes/app_routes.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/custom_text_field.dart';
 import 'package:albanoon/features/home/presentation/widgets/school_home_item.dart';
@@ -12,6 +13,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:go_router/go_router.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -53,7 +55,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     SVGAssets.search,
                   ),
                 ),
-                onTap: () {},
+                onTap: () {
+                  context.pushNamed(AppRoutes.schoolDetails);
+                },
               ),
               SizedBox(height: 16.h),
               Row(
