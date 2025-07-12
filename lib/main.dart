@@ -1,5 +1,6 @@
 import 'package:albanoon/core/localization/app_localizations.dart';
 import 'package:albanoon/core/localization/locale_provider.dart';
+import 'package:albanoon/core/network/injection_container.dart';
 import 'package:albanoon/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -10,6 +11,7 @@ import 'core/theme/theme.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await init();
   runApp(
     MultiProvider(
       providers: [

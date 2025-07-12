@@ -1,9 +1,15 @@
 import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
+import 'package:albanoon/core/network/injection_container.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/custom_text_field.dart';
 import 'package:albanoon/features/home/presentation/widgets/school_home_item.dart';
+import 'package:albanoon/features/school/data/models/schools_request_model.dart';
+import 'package:albanoon/features/school/data/models/schools_response_model.dart';
+import 'package:albanoon/features/school/presentation/managers/school_cubit.dart';
+import 'package:albanoon/features/school/presentation/managers/school_state.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 
@@ -72,11 +78,36 @@ class _HomeScreenState extends State<HomeScreen> {
                 ],
               ),
               SizedBox(height: 16.h),
-              SchoolHomeItem(
-                city: "جده",
-                disclaimer: 'مدرسه حديثه',
-                name: 'مدرسة الملك فيصل',
-                image: "assets/png/school_bg.jpg",
+              BlocProvider(
+                create: (context) {
+                  final cubit = sl<SchoolsCubit>();
+                  cubit.getPublicSchools(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel()); // Call the method immediately after creating the cubit
+                  return cubit;
+                },
+                child: BlocBuilder<SchoolsCubit, SchoolsState>(
+                  builder: (context, state) {
+                    return state is SchoolsLoading
+                        ? Center(
+                            child: CircularProgressIndicator(
+                            color: AppTheme.primaryColor,
+                          ))
+                        : state is SchoolsLoaded && state.schoolsResponseModel.result?.schools !=null
+                            ?
+                        ListView.builder(
+                            itemCount: state.schoolsResponseModel.result?.schools?.length??0,
+                            itemBuilder:   (context,index){
+                              School? school =state.schoolsResponseModel.result?.schools![index];
+                             return SchoolHomeItem(
+                                city: school?.city??"",
+                                disclaimer: 'مدرسه حديثه',
+                                name: school?.name??"",
+                                image: "assets/png/school_bg.jpg",
+                              );
+                            }
+                            )
+                            : const SizedBox.shrink();
+                  },
+                ),
               ),
             ],
           ),

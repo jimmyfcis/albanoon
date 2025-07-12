@@ -26,7 +26,7 @@ Future<void> init() async {
     ),
   );
 
-
+  //Use Cases
   sl.registerLazySingleton<GetPublicSchoolUseCase>(
         () => GetPublicSchoolUseCase(sl<SchoolRepository>()),
   );
