@@ -2,9 +2,11 @@ import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/custom_text_field.dart';
+import 'package:albanoon/features/home/presentation/widgets/school_home_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
+
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -45,8 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SVGAssets.search,
                   ),
                 ),
-                onTap: (){
-                },
+                onTap: () {},
               ),
               SizedBox(height: 16.h),
               Row(
@@ -68,8 +69,14 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.w300,
                     ),
                   ),
-
                 ],
+              ),
+              SizedBox(height: 16.h),
+              SchoolHomeItem(
+                city: "جده",
+                disclaimer: 'مدرسه حديثه',
+                name: 'مدرسة الملك فيصل',
+                image: "assets/png/school_bg.jpg",
               ),
             ],
           ),

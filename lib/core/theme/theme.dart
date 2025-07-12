@@ -8,6 +8,8 @@ class AppTheme {
   static const Color greyColor = Color(0xFFE8E8E8);
   static const Color hintColor = Color(0xFF92979F);
   static const Color formBordersColor = Color(0xFFE2E8F0);
+  static const Color textColor = Color(0xFF4D3BD0);
+  static const Color gradientColor = Color(0xFF302294);
 }
 
 ThemeData appThemeData = ThemeData(
