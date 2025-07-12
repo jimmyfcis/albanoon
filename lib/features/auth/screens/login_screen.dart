@@ -1,12 +1,12 @@
 import 'package:albanoon/core/assets/images/image_assets.dart';
 import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
+import 'package:albanoon/core/routes/app_routes.dart';
 import 'package:albanoon/core/storage/token_storage.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/email_text_field.dart';
 import 'package:albanoon/core/widgets/form_fields/password_text_field.dart';
 import 'package:albanoon/core/widgets/main_button.dart';
-import 'package:albanoon/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';

@@ -1,5 +1,5 @@
 import 'package:albanoon/core/assets/images/image_assets.dart';
-import 'package:albanoon/routes/app_routes.dart';
+import 'package:albanoon/core/routes/app_routes.dart';
 import 'package:flutter/material.dart';
 import 'package:go_router/go_router.dart';
 class SplashScreen extends StatefulWidget {

@@ -1,6 +1,6 @@
 import 'package:albanoon/core/localization/app_localizations.dart';
 import 'package:albanoon/core/localization/locale_provider.dart';
-import 'package:albanoon/routes/app_router.dart';
+import 'package:albanoon/core/routes/app_router.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
