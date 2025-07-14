@@ -4,11 +4,11 @@ import 'package:albanoon/core/network/injection_container.dart';
 import 'package:albanoon/core/routes/app_routes.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/custom_text_field.dart';
-import 'package:albanoon/features/home/presentation/widgets/school_home_item.dart';
 import 'package:albanoon/features/school/data/models/schools_request_model.dart';
 import 'package:albanoon/features/school/data/models/schools_response_model.dart';
 import 'package:albanoon/features/school/presentation/managers/school_cubit.dart';
 import 'package:albanoon/features/school/presentation/managers/school_state.dart';
+import 'package:albanoon/features/school/presentation/widgets/school_home_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -36,7 +36,7 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(width: 16.w),
           SvgPicture.asset(SVGAssets.coloredLogo),
           Spacer(),
-          SvgPicture.asset(SVGAssets.notificationDisabled),
+          SvgPicture.asset(SVGAssets.notificationDisabled,width: 20.w,height: 20.h,),
           SizedBox(width: 16.w),
         ],
       ),

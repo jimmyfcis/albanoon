@@ -1,4 +1,4 @@
-import 'package:albanoon/features/home/presentation/widgets/school_disclaimer.dart';
+import 'package:albanoon/features/school/presentation/widgets/school_disclaimer.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';

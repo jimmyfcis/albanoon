@@ -3,11 +3,11 @@ import 'package:albanoon/core/localization/app_extensions.dart';
 import 'package:albanoon/core/network/injection_container.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/custom_text_field.dart';
-import 'package:albanoon/features/home/presentation/widgets/school_home_item.dart';
 import 'package:albanoon/features/school/data/models/schools_request_model.dart';
 import 'package:albanoon/features/school/data/models/schools_response_model.dart';
 import 'package:albanoon/features/school/presentation/managers/school_cubit.dart';
 import 'package:albanoon/features/school/presentation/managers/school_state.dart';
+import 'package:albanoon/features/school/presentation/widgets/school_search_item.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -50,7 +50,7 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
         leading: SizedBox.shrink(),
         actions: [
           SizedBox(width: 16.w),
-          SvgPicture.asset(SVGAssets.coloredLogo),
+          SvgPicture.asset(SVGAssets.primaryLogo),
           Spacer(),
           SvgPicture.asset(SVGAssets.notificationDisabled,width: 20.w,height: 20.h,),
           SizedBox(width: 24.w),
@@ -120,7 +120,7 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                                     onTap: (){
 
                                     },
-                                    child: SchoolHomeItem(
+                                    child: SchoolSearchItem(
                                       city: school?.city??"",
                                       disclaimer: 'مدرسه حديثه',
                                       name: school?.name??"",

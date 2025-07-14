@@ -10,6 +10,7 @@ class AppTheme {
   static const Color formBordersColor = Color(0xFFE2E8F0);
   static const Color textColor = Color(0xFF4D3BD0);
   static const Color gradientColor = Color(0xFF302294);
+  static const Color dividerColor = Color(0xFFF1F5F9);
 }
 
 ThemeData appThemeData = ThemeData(

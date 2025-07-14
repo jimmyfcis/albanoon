@@ -10,4 +10,5 @@ class SVGAssets {
   static const String favorites = "assets/svg/favorites.svg";
   static const String share = "assets/svg/share.svg";
   static const String back = "assets/svg/back.svg";
+  static const String primaryLogo = "assets/svg/primary_logo.svg";
 }
