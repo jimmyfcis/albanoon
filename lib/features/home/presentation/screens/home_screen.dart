@@ -14,7 +14,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
-import 'dart:async' as dart_async;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -24,14 +23,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  final SchoolsCubit _schoolsCubit = sl<SchoolsCubit>();
-  final ScrollController _scrollController = ScrollController();
-  final TextEditingController _searchController = TextEditingController();
 
-
-  dart_async.Timer? _debounce;
   @override
   Widget build(BuildContext context) {
+    final locale = Localizations.localeOf(context);
+    final isArabic = locale.languageCode == 'ar';
     return Scaffold(
       backgroundColor: AppTheme.whiteColor,
       appBar: AppBar(
@@ -63,7 +59,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 ),
                 onTap: () {
-                  context.pushNamed(AppRoutes.schoolDetails);
+                  context.pushNamed(AppRoutes.allSchools);
                 },
               ),
               SizedBox(height: 16.h),
@@ -78,12 +74,17 @@ class _HomeScreenState extends State<HomeScreen> {
                       fontWeight: FontWeight.w500,
                     ),
                   ),
-                  Text(
-                    context.tr.translate("view_more"),
-                    style: TextStyle(
-                      fontSize: 12.sp,
-                      color: AppTheme.primaryColor,
-                      fontWeight: FontWeight.w300,
+                  InkWell(
+                    onTap: (){
+                      context.pushNamed(AppRoutes.allSchools);
+                    },
+                    child: Text(
+                      context.tr.translate("view_more"),
+                      style: TextStyle(
+                        fontSize: 12.sp,
+                        color: AppTheme.primaryColor,
+                        fontWeight: FontWeight.w300,
+                      ),
                     ),
                   ),
                 ],
@@ -112,12 +113,17 @@ class _HomeScreenState extends State<HomeScreen> {
                                      state.schoolsResponseModel.result?.schools?.length??0,
                                         (index){
                                       School? school =state.schoolsResponseModel.result?.schools![index];
-                                     return SchoolHomeItem(
-                                        city: school?.city??"",
-                                        disclaimer: 'مدرسه حديثه',
-                                        name: school?.name??"",
-                                        image: "assets/png/school_bg.jpg",
-                                      );
+                                     return InkWell(
+                                       onTap: (){
+                                         context.pushNamed(AppRoutes.schoolDetails);
+                                       },
+                                       child: SchoolHomeItem(
+                                          city:school?.city??"",
+                                          disclaimer: 'مدرسه حديثه',
+                                          name:  isArabic?school?.nameAr??"":school?.name??"",
+                                          image: "assets/png/school_bg.jpg",
+                                        ),
+                                     );
                                     }
                                     ),
                               ],

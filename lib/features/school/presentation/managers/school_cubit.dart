@@ -44,17 +44,4 @@ class SchoolsCubit extends Cubit<SchoolsState> {
       emit(SchoolsFailure( "No Schools",404));
     }
   }
-
-  // _loadMore() {
-  //   _scrollController.addListener(() {
-  //     if (_scrollController.position.atEdge) {
-  //       bool isTop = _scrollController.position.pixels == 0;
-  //       if (!isTop) {
-  //         if (_schoolsCubit.schoolsHaveMore()) {
-  //           _schoolsCubit.getSchoolsLoadMore(_schoolsCubit.getCurrentPageNumber() + 1,_searchController.text);
-  //         }
-  //       }
-  //     }
-  //   });
-  // }
 }

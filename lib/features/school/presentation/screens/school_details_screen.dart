@@ -4,6 +4,7 @@ import 'package:albanoon/core/theme/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:go_router/go_router.dart';
 
 class SchoolDetailsScreen extends StatefulWidget {
   const SchoolDetailsScreen({super.key});
@@ -22,7 +23,11 @@ class _SchoolDetailsScreenState extends State<SchoolDetailsScreen> {
         actions: [
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 16.0.w),
-            child: SvgPicture.asset(SVGAssets.back,width: 40.w,height: 40.h,),
+            child: InkWell(
+                onTap: (){
+                  context.pop();
+                },
+                child: SvgPicture.asset(SVGAssets.back,width: 40.w,height: 40.h,)),
           ),
         ],
         leadingWidth: 100.w,
