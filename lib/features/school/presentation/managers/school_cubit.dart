@@ -1,5 +1,6 @@
 import 'package:albanoon/core/error/error_handler.dart';
 import 'package:albanoon/features/school/data/models/schools_request_model.dart';
+import 'package:albanoon/features/school/data/models/schools_response_model.dart';
 import 'package:albanoon/features/school/domain/use_case/get_public_school_use_case.dart';
 import 'package:albanoon/features/school/presentation/managers/school_state.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -19,4 +20,41 @@ class SchoolsCubit extends Cubit<SchoolsState> {
       emit(SchoolsFailure(failure.message, failure.statusCode ?? 0));
     }
   }
+  bool schoolsHaveMore() {
+    final SchoolsLoaded currState = state as SchoolsLoaded;
+    return currState.schoolsResponseModel.result!.schools!.length < currState.schoolsResponseModel.result!.listMetadata!.totalCount!;
+  }
+
+  int getCurrentPageNumber() {
+    final SchoolsLoaded currState = state as SchoolsLoaded;
+    return currState.schoolsResponseModel.result!.listMetadata!.currentPage!;
+  }
+  Future<void> getSchoolsLoadMore(int pageNumber,String freeText) async {
+    final SchoolsLoaded currState = state as SchoolsLoaded;
+    emit(SchoolsLoaded( currState.schoolsResponseModel));
+
+    PublicSchoolsResponseModel schoolsResponseModel = await getPublicSchoolUseCase(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(pageNo: 1,pageSize: 6,filter: Filter(freeText:freeText )));
+
+    if (schoolsResponseModel.result!.schools!=null &&schoolsResponseModel.result!.schools!.isNotEmpty)
+    {
+      schoolsResponseModel.result!.schools!.insertAll(0, currState.schoolsResponseModel.result!.schools??[]);
+      emit(SchoolsLoaded( schoolsResponseModel));
+    }
+    else{
+      emit(SchoolsFailure( "No Schools",404));
+    }
+  }
+
+  // _loadMore() {
+  //   _scrollController.addListener(() {
+  //     if (_scrollController.position.atEdge) {
+  //       bool isTop = _scrollController.position.pixels == 0;
+  //       if (!isTop) {
+  //         if (_schoolsCubit.schoolsHaveMore()) {
+  //           _schoolsCubit.getSchoolsLoadMore(_schoolsCubit.getCurrentPageNumber() + 1,_searchController.text);
+  //         }
+  //       }
+  //     }
+  //   });
+  // }
 }

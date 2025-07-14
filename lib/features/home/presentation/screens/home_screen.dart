@@ -14,6 +14,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:go_router/go_router.dart';
+import 'dart:async' as dart_async;
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -23,6 +24,12 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final SchoolsCubit _schoolsCubit = sl<SchoolsCubit>();
+  final ScrollController _scrollController = ScrollController();
+  final TextEditingController _searchController = TextEditingController();
+
+
+  dart_async.Timer? _debounce;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -85,7 +92,7 @@ class _HomeScreenState extends State<HomeScreen> {
               BlocProvider(
                 create: (context) {
                   final cubit = sl<SchoolsCubit>();
-                  cubit.getPublicSchools(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel()); // Call the method immediately after creating the cubit
+                  cubit.getPublicSchools(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(pageNo: 1,pageSize: 6)); // Call the method immediately after creating the cubit
                   return cubit;
                 },
                 child: BlocBuilder<SchoolsCubit, SchoolsState>(
@@ -97,18 +104,26 @@ class _HomeScreenState extends State<HomeScreen> {
                           ))
                         : state is SchoolsLoaded && state.schoolsResponseModel.result?.schools !=null
                             ?
-                        ListView.builder(
-                            itemCount: state.schoolsResponseModel.result?.schools?.length??0,
-                            itemBuilder:   (context,index){
-                              School? school =state.schoolsResponseModel.result?.schools![index];
-                             return SchoolHomeItem(
-                                city: school?.city??"",
-                                disclaimer: 'مدرسه حديثه',
-                                name: school?.name??"",
-                                image: "assets/png/school_bg.jpg",
-                              );
-                            }
-                            )
+                        Expanded(
+                          child: SingleChildScrollView(
+                            child: Column(
+                              children: [
+                                ...List.generate(
+                                     state.schoolsResponseModel.result?.schools?.length??0,
+                                        (index){
+                                      School? school =state.schoolsResponseModel.result?.schools![index];
+                                     return SchoolHomeItem(
+                                        city: school?.city??"",
+                                        disclaimer: 'مدرسه حديثه',
+                                        name: school?.name??"",
+                                        image: "assets/png/school_bg.jpg",
+                                      );
+                                    }
+                                    ),
+                              ],
+                            ),
+                          ),
+                        )
                             : const SizedBox.shrink();
                   },
                 ),
@@ -119,4 +134,5 @@ class _HomeScreenState extends State<HomeScreen> {
       ),
     );
   }
+
 }
