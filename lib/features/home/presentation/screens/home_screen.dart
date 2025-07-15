@@ -113,16 +113,19 @@ class _HomeScreenState extends State<HomeScreen> {
                                      state.schoolsResponseModel.result?.schools?.length??0,
                                         (index){
                                       School? school =state.schoolsResponseModel.result?.schools![index];
-                                     return InkWell(
-                                       onTap: (){
-                                         context.pushNamed(AppRoutes.schoolDetails);
-                                       },
-                                       child: SchoolHomeItem(
-                                          city:school?.city??"",
-                                          disclaimer: 'مدرسه حديثه',
-                                          name:  isArabic?school?.nameAr??"":school?.name??"",
-                                          image: "assets/png/school_bg.jpg",
-                                        ),
+                                     return Padding(
+                                       padding: EdgeInsets.symmetric(vertical: 8.0.h),
+                                       child: InkWell(
+                                         onTap: (){
+                                           context.pushNamed(AppRoutes.schoolDetails);
+                                         },
+                                         child: SchoolHomeItem(
+                                            city:school?.city??"",
+                                            disclaimer: 'مدرسه حديثه',
+                                            name:  isArabic?school?.nameAr??"":school?.name??"",
+                                            image: "assets/png/school_bg.jpg",
+                                          ),
+                                       ),
                                      );
                                     }
                                     ),
