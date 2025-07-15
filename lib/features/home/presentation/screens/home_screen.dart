@@ -1,11 +1,11 @@
 import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
+import 'package:albanoon/core/models/school_model.dart';
 import 'package:albanoon/core/network/injection_container.dart';
 import 'package:albanoon/core/routes/app_routes.dart';
 import 'package:albanoon/core/theme/theme.dart';
 import 'package:albanoon/core/widgets/form_fields/custom_text_field.dart';
 import 'package:albanoon/features/school/data/models/schools_request_model.dart';
-import 'package:albanoon/features/school/data/models/schools_response_model.dart';
 import 'package:albanoon/features/school/presentation/managers/school_cubit.dart';
 import 'package:albanoon/features/school/presentation/managers/school_state.dart';
 import 'package:albanoon/features/school/presentation/widgets/school_home_item.dart';

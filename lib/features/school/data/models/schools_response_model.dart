@@ -1,3 +1,5 @@
+import 'package:albanoon/core/models/school_model.dart';
+
 class PublicSchoolsResponseModel {
   Result? result;
   int? status;
@@ -42,100 +44,7 @@ class Result {
   }
 }
 
-class School {
-  String? id;
-  String? name;
-  String? nameAr;
-  String? description;
-  String? descriptionAr;
-  String? countryName;
-  String? provinceName;
-  String? city;
-  String? street;
-  String? buildingNumber;
-  String? postalCode;
-  String? address;
-  String? logo;
-  Attachment? logoAttachment;
-  List<Attachment>? attachments;
-  List<Attachment>? images;
-  bool? isActive;
-  double? latitude;
-  double? longitude;
-  bool? isFavorite;
 
-  School({
-    this.id,
-    this.name,
-    this.nameAr,
-    this.description,
-    this.descriptionAr,
-    this.countryName,
-    this.provinceName,
-    this.city,
-    this.street,
-    this.buildingNumber,
-    this.postalCode,
-    this.address,
-    this.logo,
-    this.logoAttachment,
-    this.attachments,
-    this.images,
-    this.isActive,
-    this.latitude,
-    this.longitude,
-    this.isFavorite,
-  });
-
-  factory School.fromJson(Map<String, dynamic> json) {
-    return School(
-      id: json['id'],
-      name: json['name'],
-      nameAr: json['nameAr'],
-      description: json['description'],
-      descriptionAr: json['descriptionAr'],
-      countryName: json['countryName'],
-      provinceName: json['provinceName'],
-      city: json['city'],
-      street: json['street'],
-      buildingNumber: json['buildingNumber'],
-      postalCode: json['postalCode'],
-      address: json['address'],
-      logo: json['logo'],
-      logoAttachment: json['logoAttachment'] != null
-          ? Attachment.fromJson(json['logoAttachment'])
-          : null,
-      attachments: (json['attachments'] as List?)
-          ?.map((e) => Attachment.fromJson(e))
-          .toList(),
-      images: (json['images'] as List?)
-          ?.map((e) => Attachment.fromJson(e))
-          .toList(),
-      isActive: json['isActive'],
-      latitude: (json['latitude'] as num?)?.toDouble(),
-      longitude: (json['longitude'] as num?)?.toDouble(),
-      isFavorite: json['isFavorite'],
-    );
-  }
-}
-
-class Attachment {
-  String? id;
-  String? fileName;
-  String? contentType;
-  String? url;
-
-  Attachment({this.id, this.fileName, this.contentType, this.url});
-
-  factory Attachment.fromJson(Map<String, dynamic> json) {
-    return Attachment(
-      id: json['id'],
-      fileName: json['fileName'],
-      contentType: json['contentType'],
-      url: json['url'],
-    );
-  }
-}
 
 class ListMetadata {
   int? currentPage;
