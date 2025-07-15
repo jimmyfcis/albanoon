@@ -63,11 +63,10 @@ class _SchoolDetailsScreenState extends State<SchoolDetailsScreen> {
         ),
         centerTitle: true,
       ),
-      body: Stack(
-        clipBehavior: Clip.none,
+      body: Column(
         children: [
           Stack(
-            alignment: Alignment.bottomRight,
+            clipBehavior: Clip.none,
             children: [
               Container(
                 height: 180.h,
@@ -91,17 +90,21 @@ class _SchoolDetailsScreenState extends State<SchoolDetailsScreen> {
                   ),
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: SizedBox(
-                  width: MediaQuery.of(context).size.width/1.5,
-                  child: Text(
-                    "مدرسة الملك فهد الجديدة مشتركة King Fahd New School",
-                    maxLines: 2,
-                    style: TextStyle(
-                      fontSize: 16.sp,
-                      fontWeight: FontWeight.w500,
-                      color: AppTheme.whiteColor,
+              Positioned(
+                bottom: 0,
+                right: 0,
+                child: Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SizedBox(
+                    width: MediaQuery.of(context).size.width / 1.5,
+                    child: Text(
+                      "مدرسة الملك فهد الجديدة مشتركة King Fahd New School",
+                      maxLines: 2,
+                      style: TextStyle(
+                        fontSize: 16.sp,
+                        fontWeight: FontWeight.w500,
+                        color: AppTheme.whiteColor,
+                      ),
                     ),
                   ),
                 ),
@@ -112,10 +115,10 @@ class _SchoolDetailsScreenState extends State<SchoolDetailsScreen> {
                 child: Container(
                   decoration: BoxDecoration(
                     color: AppTheme.whiteColor,
-                    borderRadius: BorderRadius.all( Radius.circular(16.r)),
+                    borderRadius: BorderRadius.all(Radius.circular(16.r)),
                   ),
                   child: Padding(
-                    padding:  EdgeInsets.symmetric(vertical: 4.0.h,horizontal: 11.w),
+                    padding: EdgeInsets.symmetric(vertical: 4.0.h, horizontal: 11.w),
                     child: Row(
                       children: [
                         Text(
@@ -133,105 +136,98 @@ class _SchoolDetailsScreenState extends State<SchoolDetailsScreen> {
                   ),
                 ),
               ),
+              Positioned(
+                left: 16.w,
+                top: 140.h,
+                child: Container(
+                  decoration: BoxDecoration(
+                    color: AppTheme.blackColor,
+                    border: Border.all(color: AppTheme.formBordersColor),
+                    borderRadius: BorderRadius.all(Radius.circular(8.r)),
+                  ),
+                  child: Image.asset(PNGAssets.schoolLogo),
+                ),
+              ),
             ],
           ),
-          Positioned(
-            left: 16.w,
-            top: 140.h,
-            child: Container(
-              decoration: BoxDecoration(
-                color: AppTheme.blackColor,
-                border: Border.all(color: AppTheme.formBordersColor),
-                borderRadius: BorderRadius.all( Radius.circular(8.r)),
+          Expanded(
+            child: SingleChildScrollView(
+              padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 16.h),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(
+                    width: MediaQuery.of(context).size.width / 2,
+                    child: Text(
+                      "9300 شارع الحمرا جدة , جدة , المملكة العربية السعودية",
+                      maxLines: 3,
+                      style: TextStyle(
+                        fontWeight: FontWeight.w300,
+                        fontSize: 16.sp,
+                        color: AppTheme.blackColor,
+                      ),
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    "admission@kingfahd.com",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.sp,
+                      color: AppTheme.blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 10.h),
+                  Text(
+                    "+965 551231254",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.sp,
+                      color: AppTheme.blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  Divider(color: AppTheme.formBordersColor),
+                  SizedBox(height: 20.h),
+                  Text(
+                    context.tr.translate("about_school"),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.sp,
+                      color: AppTheme.blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "مدرسة الأفق الثانوية هي واحدة من المدارس الرائدة في المملكة العربية السعودية، تقع في مدينة الرياض. تأسست المدرسة في عام 1995 بهدف توفير بيئة تعليمية متميزة للطلاب، حيث تقدم برامج تعليمية شاملة تغطي جميع المراحل الدراسية من المرحلة الابتدائية إلى الثانوية. تهتم المدرسة بتطوير مهارات الطلاب العلمية والفكرية والاجتماعية،   مع التركيز على تحقيق التفوق الأكاديمي وتعزيز القيم الإنسانية.",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.sp,
+                      color: AppTheme.blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 20.h),
+                  Text(
+                    context.tr.translate("vision"),
+                    style: TextStyle(
+                      fontWeight: FontWeight.w500,
+                      fontSize: 16.sp,
+                      color: AppTheme.blackColor,
+                    ),
+                  ),
+                  SizedBox(height: 12.h),
+                  Text(
+                    "مدرسة الأفق الثانوية هي واحدة من المدارس الرائدة في المملكة العربية السعودية، تقع في مدينة الرياض. تأسست المدرسة في عام 1995 بهدف توفير بيئة تعليمية متميزة للطلاب، حيث تقدم برامج تعليمية شاملة تغطي جميع المراحل الدراسية من المرحلة الابتدائية إلى الثانوية. تهتم المدرسة بتطوير مهارات الطلاب العلمية والفكرية والاجتماعية،   مع التركيز على تحقيق التفوق الأكاديمي وتعزيز القيم الإنسانية.",
+                    style: TextStyle(
+                      fontWeight: FontWeight.w300,
+                      fontSize: 16.sp,
+                      color: AppTheme.blackColor,
+                    ),
+                  ),
+                ],
               ),
-              child:Image.asset(PNGAssets.schoolLogo),
             ),
           ),
-          Positioned(
-            top: 220.h,
-            right: 12.w,
-            left: 16.w,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(
-                  width:MediaQuery.of(context).size.width/2,
-                  child: Text(
-                    "9300 شارع الحمرا جدة , جدة , المملكة العربية السعودية",
-                    maxLines: 3,
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16.sp,
-                      color: AppTheme.blackColor,
-                    ),
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                Text(
-                  "admission@kingfahd.com",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16.sp,
-                    color: AppTheme.blackColor,
-                  ),
-                ),
-                SizedBox(height: 10.h),
-                Text(
-                  "+965 551231254",
-                  style: TextStyle(
-                    fontWeight: FontWeight.w300,
-                    fontSize: 16.sp,
-                    color: AppTheme.blackColor,
-                  ),
-                ),
-                SizedBox(height: 20.h),
-                Divider(color: AppTheme.formBordersColor),
-                SizedBox(height: 20.h),
-                Text(
-                  context.tr.translate("about_school"),
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    fontSize: 16.sp,
-                    color: AppTheme.blackColor,
-                  ),
-                ),
-                SizedBox(height: 12.h),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "مدرسة الأفق الثانوية هي واحدة من المدارس الرائدة في المملكة العربية السعودية، تقع في مدينة الرياض. تأسست المدرسة في عام 1995 بهدف توفير بيئة تعليمية متميزة للطلاب، حيث تقدم برامج تعليمية شاملة تغطي جميع المراحل الدراسية من المرحلة الابتدائية إلى الثانوية. تهتم المدرسة بتطوير مهارات الطلاب العلمية والفكرية والاجتماعية،   مع التركيز على تحقيق التفوق الأكاديمي وتعزيز القيم الإنسانية.",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16.sp,
-                      color: AppTheme.blackColor,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "مدرسة الأفق الثانوية هي واحدة من المدارس الرائدة في المملكة العربية السعودية، تقع في مدينة الرياض. تأسست المدرسة في عام 1995 بهدف توفير بيئة تعليمية متميزة للطلاب، حيث تقدم برامج تعليمية شاملة تغطي جميع المراحل الدراسية من المرحلة الابتدائية إلى الثانوية. تهتم المدرسة بتطوير مهارات الطلاب العلمية والفكرية والاجتماعية،   مع التركيز على تحقيق التفوق الأكاديمي وتعزيز القيم الإنسانية.",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16.sp,
-                      color: AppTheme.blackColor,
-                    ),
-                  ),
-                ),
-                SizedBox(
-                  width: MediaQuery.of(context).size.width,
-                  child: Text(
-                    "مدرسة الأفق الثانوية هي واحدة من المدارس الرائدة في المملكة العربية السعودية، تقع في مدينة الرياض. تأسست المدرسة في عام 1995 بهدف توفير بيئة تعليمية متميزة للطلاب، حيث تقدم برامج تعليمية شاملة تغطي جميع المراحل الدراسية من المرحلة الابتدائية إلى الثانوية. تهتم المدرسة بتطوير مهارات الطلاب العلمية والفكرية والاجتماعية،   مع التركيز على تحقيق التفوق الأكاديمي وتعزيز القيم الإنسانية.",
-                    style: TextStyle(
-                      fontWeight: FontWeight.w300,
-                      fontSize: 16.sp,
-                      color: AppTheme.blackColor,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          )
         ],
       ),
     );
