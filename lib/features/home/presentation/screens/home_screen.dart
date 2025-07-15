@@ -1,3 +1,4 @@
+import 'package:albanoon/core/assets/images/image_assets.dart';
 import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
 import 'package:albanoon/core/models/school_model.dart';
@@ -123,7 +124,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             city:school?.city??"",
                                             disclaimer: 'مدرسه حديثه',
                                             name:  isArabic?school?.nameAr??"":school?.name??"",
-                                            image: "assets/png/school_bg.jpg",
+                                            image: PNGAssets.school,
                                           ),
                                        ),
                                      );

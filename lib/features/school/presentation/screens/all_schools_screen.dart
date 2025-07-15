@@ -1,3 +1,4 @@
+import 'package:albanoon/core/assets/images/image_assets.dart';
 import 'package:albanoon/core/assets/svg/svg_assets.dart';
 import 'package:albanoon/core/localization/app_extensions.dart';
 import 'package:albanoon/core/models/school_model.dart';
@@ -124,7 +125,7 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                                       city: school?.city??"",
                                       disclaimer: 'مدرسه حديثه',
                                       name: school?.name??"",
-                                      image: "assets/png/school_bg.jpg",
+                                      image: PNGAssets.school,
                                     ),
                                   );
                                 }
