@@ -9,11 +9,12 @@ import '../../../../core/theme/theme.dart';
 class SchoolSearchItem extends StatefulWidget {
 
   final String city;
+  final String id;
   final String disclaimer;
   final String name;
   final String image;
   const SchoolSearchItem({
-    super.key, required this.city, required this.disclaimer, required this.name, required this.image,
+    super.key, required this.city, required this.disclaimer, required this.name, required this.image,required this.id
   });
 
   @override
@@ -29,7 +30,7 @@ class _SchoolSearchItemState extends State<SchoolSearchItem> {
         SizedBox(height: 4.h),
         InkWell(
           onTap: (){
-            context.pushNamed(AppRoutes.schoolDetails);
+            context.pushNamed(AppRoutes.schoolDetails,pathParameters: {'schoolId': widget.id},);
           },
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,

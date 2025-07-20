@@ -118,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                        padding: EdgeInsets.symmetric(vertical: 8.0.h),
                                        child: InkWell(
                                          onTap: (){
-                                           context.pushNamed(AppRoutes.schoolDetails);
+                                           context.pushNamed(AppRoutes.schoolDetails,pathParameters: {'schoolId': school?.id??""},);
                                          },
                                          child: SchoolHomeItem(
                                             city:school?.city??"",

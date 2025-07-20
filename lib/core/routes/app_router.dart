@@ -29,9 +29,12 @@ final GoRouter appRouter = GoRouter(
       builder: (context, state) => const BottomBarScreen(),
     ),
     GoRoute(
-      path: AppRoutes.schoolDetails,
+      path: '${AppRoutes.schoolDetails}/:schoolId',
       name: AppRoutes.schoolDetails,
-      builder: (context, state) => const SchoolDetailsScreen(),
+      builder: (context, state) {
+        final schoolId = state.pathParameters['schoolId']!;
+        return SchoolDetailsScreen(schoolId: schoolId);
+      },
     ),
     GoRoute(
       path: AppRoutes.allSchools,

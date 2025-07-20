@@ -117,16 +117,12 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                                 state.schoolsResponseModel.result?.schools?.length??0,
                                     (index){
                                   School? school =state.schoolsResponseModel.result?.schools![index];
-                                  return InkWell(
-                                    onTap: (){
-
-                                    },
-                                    child: SchoolSearchItem(
-                                      city: school?.city??"",
-                                      disclaimer: 'مدرسه حديثه',
-                                      name: school?.name??"",
-                                      image: PNGAssets.school,
-                                    ),
+                                  return SchoolSearchItem(
+                                    id: school?.id??"",
+                                    city: school?.city??"",
+                                    disclaimer: 'مدرسه حديثه',
+                                    name: school?.name??"",
+                                    image: PNGAssets.school,
                                   );
                                 }
                             ),

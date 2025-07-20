@@ -8,7 +8,7 @@ class SingleSchoolCubit extends Cubit<SingleSchoolState> {
 
   SingleSchoolCubit({required this.getSinglePublicSchoolUseCase}) : super(SingleSchoolInitial());
 
-  Future<void> getPublicSchools({required String id}) async {
+  Future<void> getSinglePublicSchools({required String id}) async {
     try {
       emit(SingleSchoolLoading());
       final response = await getSinglePublicSchoolUseCase(id: id);
