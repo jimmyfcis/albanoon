@@ -48,6 +48,7 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               CustomTextField(
                 name: "Search",
+                radius: 100.r,
                 labelText: context.tr.translate("search_school"),
                 hasName: false,
                 hintText: context.tr.translate("search_school"),

@@ -33,15 +33,17 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
   @override
   void initState() {
     super.initState();
-    _schoolsCubit.getPublicSchools(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(pageSize: 10,pageNo: 1));
+    _schoolsCubit.getPublicSchools(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(pageSize: 10, pageNo: 1));
     _loadMore();
   }
+
   @override
   void dispose() {
     _searchController.dispose();
     _debounce?.cancel();
     super.dispose();
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,13 +55,21 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
           SizedBox(width: 16.w),
           SvgPicture.asset(SVGAssets.primaryLogo),
           Spacer(),
-          SvgPicture.asset(SVGAssets.notificationDisabled,width: 20.w,height: 20.h,),
+          SvgPicture.asset(
+            SVGAssets.notificationDisabled,
+            width: 20.w,
+            height: 20.h,
+          ),
           SizedBox(width: 24.w),
           InkWell(
-              onTap: (){
+              onTap: () {
                 context.pop();
               },
-              child: SvgPicture.asset(SVGAssets.back,width: 50.w,height: 50.h,)),
+              child: SvgPicture.asset(
+                SVGAssets.back,
+                width: 50.w,
+                height: 50.h,
+              )),
           SizedBox(width: 16.w),
         ],
       ),
@@ -68,34 +78,61 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              CustomTextField(
-                name: "Search",
-                controller: _searchController,
-                labelText: context.tr.translate("search_school"),
-                hasName: false,
-                hintText: context.tr.translate("search_school"),
-                fillColor: AppTheme.whiteColor,
-                hintTextColor: AppTheme.hintColor,
-                suffixIcon: Padding(
-                  padding: const EdgeInsets.all(10.0),
-                  child: SvgPicture.asset(
-                    SVGAssets.search,
+              Row(
+                children: [
+                  Expanded(
+                    child: CustomTextField(
+                      name: "Search",
+                      radius: 100.r,
+                      controller: _searchController,
+                      labelText: context.tr.translate("search_school"),
+                      hasName: false,
+                      hintText: context.tr.translate("search_school"),
+                      fillColor: AppTheme.whiteColor,
+                      hintTextColor: AppTheme.hintColor,
+                      suffixIcon: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: SvgPicture.asset(
+                          SVGAssets.search,
+                        ),
+                      ),
+                      onChanged: (value) {
+                        if (_debounce?.isActive ?? false) _debounce!.cancel();
+                        _debounce = dart_async.Timer(const Duration(seconds: 1), () {
+                          _schoolsCubit.getPublicSchools(
+                              getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(
+                                  pageSize: 10, pageNo: 1, filter: Filter(freeText: value ?? "")));
+                          _loadMore();
+                        });
+                      },
+                      prefixIcon: IconButton(
+                        icon: Icon(Icons.clear, size: 20.w, color: AppTheme.hintColor),
+                        onPressed: () {
+                          _searchController.clear();
+                          // _searchDoctorCubit?.searchDoctors('');
+                        },
+                      ),
+                    ),
                   ),
-                ),
-                onChanged: (value) {
-                  if (_debounce?.isActive ?? false) _debounce!.cancel();
-                  _debounce = dart_async.Timer(const Duration(seconds: 1), () {
-                    _schoolsCubit.getPublicSchools(getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(pageSize: 10,pageNo: 1,filter: Filter(freeText: value??"")));
-                    _loadMore();
-                  });
-                },
-                prefixIcon: IconButton(
-                  icon: Icon(Icons.clear, size: 20.w, color: AppTheme.hintColor),
-                  onPressed: () {
-                    _searchController.clear();
-                    // _searchDoctorCubit?.searchDoctors('');
-                  },
-                ),
+                  SizedBox(width: 10.w),
+                  InkWell(
+                    onTap: (){
+
+                    },
+                    child: Container(
+                      height: 40.h,
+                      width: 40.w,
+                      decoration: BoxDecoration(
+                        color: AppTheme.filterColor,
+                        borderRadius: BorderRadius.all(Radius.circular(100.r)),
+                      ),
+                      child: Padding(
+                        padding: const EdgeInsets.all(12.0),
+                        child: SvgPicture.asset(SVGAssets.filter),
+                      ),
+                    ),
+                  ),
+                ],
               ),
               SizedBox(height: 16.h),
               BlocProvider.value(
@@ -104,33 +141,30 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                   builder: (context, state) {
                     return state is SchoolsLoading
                         ? Center(
-                        child: CircularProgressIndicator(
-                          color: AppTheme.primaryColor,
-                        ))
-                        : state is SchoolsLoaded && state.schoolsResponseModel.result?.schools !=null
-                        ?
-                    Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ...List.generate(
-                                state.schoolsResponseModel.result?.schools?.length??0,
-                                    (index){
-                                  School? school =state.schoolsResponseModel.result?.schools![index];
-                                  return SchoolSearchItem(
-                                    id: school?.id??"",
-                                    city: school?.city??"",
-                                    disclaimer: 'مدرسه حديثه',
-                                    name: school?.name??"",
-                                    image: PNGAssets.school,
-                                  );
-                                }
-                            ),
-                          ],
-                        ),
-                      ),
-                    )
-                        : const SizedBox.shrink();
+                            child: CircularProgressIndicator(
+                            color: AppTheme.primaryColor,
+                          ))
+                        : state is SchoolsLoaded && state.schoolsResponseModel.result?.schools != null
+                            ? Expanded(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      ...List.generate(state.schoolsResponseModel.result?.schools?.length ?? 0,
+                                          (index) {
+                                        School? school = state.schoolsResponseModel.result?.schools![index];
+                                        return SchoolSearchItem(
+                                          id: school?.id ?? "",
+                                          city: school?.city ?? "",
+                                          disclaimer: 'مدرسه حديثه',
+                                          name: school?.name ?? "",
+                                          image: PNGAssets.school,
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : const SizedBox.shrink();
                   },
                 ),
               ),
@@ -141,16 +175,16 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
     );
   }
 
-_loadMore() {
-  _scrollController.addListener(() {
-    if (_scrollController.position.atEdge) {
-      bool isTop = _scrollController.position.pixels == 0;
-      if (!isTop) {
-        if (_schoolsCubit.schoolsHaveMore()) {
-          _schoolsCubit.getSchoolsLoadMore(_schoolsCubit.getCurrentPageNumber() + 1,_searchController.text);
+  _loadMore() {
+    _scrollController.addListener(() {
+      if (_scrollController.position.atEdge) {
+        bool isTop = _scrollController.position.pixels == 0;
+        if (!isTop) {
+          if (_schoolsCubit.schoolsHaveMore()) {
+            _schoolsCubit.getSchoolsLoadMore(_schoolsCubit.getCurrentPageNumber() + 1, _searchController.text);
+          }
         }
       }
-    }
-  });
-}
+    });
+  }
 }

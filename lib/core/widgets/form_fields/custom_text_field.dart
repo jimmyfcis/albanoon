@@ -13,6 +13,7 @@ class CustomTextField extends StatelessWidget {
   final TextEditingController? controller;
   final String labelText;
   final String? hintText;
+  final double? radius;
   final bool isRequired;
   final List<String? Function(String?, String?)> validators;
   final ValueChanged<String?>? onChanged;
@@ -43,7 +44,7 @@ class CustomTextField extends StatelessWidget {
     this.fillColor,
     this.onTap,
     this.maxLines,
-    this.hintTextColor, this.controller,
+    this.hintTextColor, this.controller, this.radius,
   }) : super(key: key);
 
   @override
@@ -85,19 +86,19 @@ class CustomTextField extends StatelessWidget {
               fontSize: 13,
             ),
             errorBorder: UnderlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(radius??4.r),
               borderSide: BorderSide(color: AppTheme.errorColor, width: 1),
             ),
             enabledBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(radius??4.r),
               borderSide: const BorderSide(color: AppTheme.formBordersColor, width: 1),
             ),
             focusedBorder: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(radius??4.r),
               borderSide: const BorderSide(color: AppTheme.formBordersColor, width: 1),
             ),
             border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(4.r),
+              borderRadius: BorderRadius.circular(radius??4.r),
               borderSide: const BorderSide(color: AppTheme.formBordersColor, width: 1),
             ),
             hintText: hintText,
