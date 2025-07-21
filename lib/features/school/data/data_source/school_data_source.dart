@@ -38,7 +38,7 @@ class SchoolRemoteDataSourceImpl implements SchoolRemoteDataSource {
 
   @override
   Future<SchoolLookupsResponseModel> getPublicSchoolsLookUps() async {
-    final response = await dio.get(ApiEndpoints.getPublicSchools);
+    final response = await dio.get(ApiEndpoints.getSchoolLookups);
     return SchoolLookupsResponseModel.fromJson(response.data);
   }
 }

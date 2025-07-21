@@ -8,7 +8,7 @@ class SchoolsLookupsCubit extends Cubit<SchoolsLookupsState> {
 
   SchoolsLookupsCubit({required this.getPublicSchoolsLookupsUseCase}) : super(SchoolsLookupsInitial());
 
-  Future<void> getSinglePublicSchools() async {
+  Future<void> getPublicSchoolsLookups() async {
     try {
       emit(SchoolsLookupsLoading());
       final response = await getPublicSchoolsLookupsUseCase();
