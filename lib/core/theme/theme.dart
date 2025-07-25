@@ -12,6 +12,7 @@ class AppTheme {
   static const Color gradientColor = Color(0xFF302294);
   static const Color dividerColor = Color(0xFFF1F5F9);
   static const Color filterColor = Color(0xFFEFEEF9);
+  static const Color grey2Color = Color(0xFFECECEF);
 }
 
 ThemeData appThemeData = ThemeData(

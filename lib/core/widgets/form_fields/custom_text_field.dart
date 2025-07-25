@@ -58,7 +58,7 @@ class CustomTextField extends StatelessWidget {
             style: TextStyle(
               fontWeight: FontWeight.w400,
               color: AppTheme.primaryTextColor,
-              fontSize: 14,
+              fontSize: 14.sp,
             ),
           ),
           SizedBox(height: 10.h),

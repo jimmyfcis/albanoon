@@ -108,7 +108,9 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                         _debounce = dart_async.Timer(const Duration(seconds: 1), () {
                           _schoolsCubit.getPublicSchools(
                               getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(
-                                  pageSize: 10, pageNo: 1, filter: Filter(freeText: value ?? "", provinceId: provinceValue?.id??"")));
+                                  pageSize: 10,
+                                  pageNo: 1,
+                                  filter: Filter(freeText: value ?? "", provinceId: provinceValue?.id ?? "")));
                           _loadMore();
                         });
                       },
@@ -126,49 +128,53 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                     value: _schoolsLookupsCubit,
                     child: BlocBuilder<SchoolsLookupsCubit, SchoolsLookupsState>(
                       builder: (context, state) {
-                        return state is SchoolsLookupsLoaded? InkWell(
-                          onTap: () {
-                            showModalBottomSheet(
-                              context: context,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
-                              ),
-                              builder: (context) {
-                                return SchoolsFilterBottomSheet(
-                                  provinces: state.schoolLookupsResponseModel.result?.provinces??[], // make sure this is fetched in Cubit
-                                  onSelected: (province) {
-                                    setState(() {
-                                      provinceValue = province;
-                                    });
-                                    _schoolsCubit.getPublicSchools(
-                                      getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(
-                                        pageSize: 10,
-                                        pageNo: 1,
-                                        filter: Filter(
-                                          freeText: _searchController.text,
-                                          provinceId: province.id ?? "",
-                                        ),
-                                      ),
-                                    );
-                                    _loadMore();
-                                  },
-                                );
-                              },
-                            );
-                          },
-                          child: Container(
-                            height: 40.h,
-                            width: 40.w,
-                            decoration: BoxDecoration(
-                              color: AppTheme.filterColor,
-                              borderRadius: BorderRadius.all(Radius.circular(100.r)),
-                            ),
-                            child: Padding(
-                              padding: const EdgeInsets.all(12.0),
-                              child: SvgPicture.asset(SVGAssets.filter),
-                            ),
-                          ),
-                        ):SizedBox.shrink();
+                        return state is SchoolsLookupsLoaded
+                            ? InkWell(
+                                onTap: () {
+                                  showModalBottomSheet(
+                                    context: context,
+                                    backgroundColor: AppTheme.whiteColor,
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.vertical(top: Radius.circular(20.r)),
+                                    ),
+                                    builder: (context) {
+                                      return SchoolsFilterBottomSheet(
+                                        provinces: state.schoolLookupsResponseModel.result?.provinces ?? [],
+                                        // make sure this is fetched in Cubit
+                                        onSelected: (province) {
+                                          setState(() {
+                                            provinceValue = province;
+                                          });
+                                          _schoolsCubit.getPublicSchools(
+                                            getPublicSchoolsRequestModel: GetPublicSchoolsRequestModel(
+                                              pageSize: 10,
+                                              pageNo: 1,
+                                              filter: Filter(
+                                                freeText: _searchController.text,
+                                                provinceId: province.id ?? "",
+                                              ),
+                                            ),
+                                          );
+                                          _loadMore();
+                                        },
+                                      );
+                                    },
+                                  );
+                                },
+                                child: Container(
+                                  height: 40.h,
+                                  width: 40.w,
+                                  decoration: BoxDecoration(
+                                    color: AppTheme.filterColor,
+                                    borderRadius: BorderRadius.all(Radius.circular(100.r)),
+                                  ),
+                                  child: Padding(
+                                    padding: const EdgeInsets.all(12.0),
+                                    child: SvgPicture.asset(SVGAssets.filter),
+                                  ),
+                                ),
+                              )
+                            : SizedBox.shrink();
                       },
                     ),
                   ),
@@ -181,30 +187,64 @@ class _AllSchoolsScreenState extends State<AllSchoolsScreen> {
                   builder: (context, state) {
                     return state is SchoolsLoading
                         ? Center(
-                        child: CircularProgressIndicator(
-                          color: AppTheme.primaryColor,
-                        ))
+                            child: CircularProgressIndicator(
+                            color: AppTheme.primaryColor,
+                          ))
                         : state is SchoolsLoaded && state.schoolsResponseModel.result?.schools != null
-                        ? Expanded(
-                      child: SingleChildScrollView(
-                        child: Column(
-                          children: [
-                            ...List.generate(state.schoolsResponseModel.result?.schools?.length ?? 0,
-                                    (index) {
-                                  School? school = state.schoolsResponseModel.result?.schools![index];
-                                  return SchoolSearchItem(
-                                    id: school?.id ?? "",
-                                    city: school?.city ?? "",
-                                    disclaimer: 'مدرسه حديثه',
-                                    name: school?.name ?? "",
-                                    image: PNGAssets.school,
-                                  );
-                                }),
-                          ],
-                        ),
-                      ),
-                    )
-                        : const SizedBox.shrink();
+                            ? Expanded(
+                                child: SingleChildScrollView(
+                                  child: Column(
+                                    children: [
+                                      ...List.generate(state.schoolsResponseModel.result?.schools?.length ?? 0,
+                                          (index) {
+                                        School? school = state.schoolsResponseModel.result?.schools![index];
+                                        return SchoolSearchItem(
+                                          id: school?.id ?? "",
+                                          city: school?.city ?? "",
+                                          disclaimer: 'مدرسه حديثه',
+                                          name: school?.name ?? "",
+                                          image: PNGAssets.school,
+                                        );
+                                      }),
+                                    ],
+                                  ),
+                                ),
+                              )
+                            : Expanded(
+                                child: Padding(
+                                  padding: EdgeInsets.symmetric(horizontal: 24.0.w),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment: CrossAxisAlignment.center,
+                                    children: [
+                                      SvgPicture.asset(
+                                        SVGAssets.noSchool,
+                                        height: 88.h,
+                                        width: 88.w,
+                                      ),
+                                      SizedBox(height: 20.h),
+                                      Text(
+                                        context.tr.translate("no_school"),
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w600,
+                                          color: AppTheme.primaryTextColor,
+                                          fontSize: 18.sp,
+                                        ),
+                                      ),
+                                      SizedBox(height: 16.h),
+                                      Text(
+                                        context.tr.translate("no_school_desc"),
+                                        textAlign: TextAlign.center,
+                                        style: TextStyle(
+                                          fontWeight: FontWeight.w300,
+                                          color: AppTheme.blackColor,
+                                          fontSize: 14.sp,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
                   },
                 ),
               ),
